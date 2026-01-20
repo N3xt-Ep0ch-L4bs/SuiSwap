@@ -5,21 +5,22 @@ import { SuiClientProvider, WalletProvider, createNetworkConfig } from "@mysten/
 import { getFullnodeUrl } from "@mysten/sui/client";
 import App from "./App.tsx";
 import "./index.css";
+import "@mysten/dapp-kit/dist/index.css"
 
 // 1️⃣ React Query Client
 const queryClient = new QueryClient();
 
 // 2️⃣ Network config
 const { networkConfig } = createNetworkConfig({
-  localnet: { rpcUrl: getFullnodeUrl("localnet") },
-  mainnet: { rpcUrl: getFullnodeUrl("mainnet") },
+  localnet: { url: getFullnodeUrl("localnet") },
+  mainnet: { url: getFullnodeUrl("mainnet") },
 });
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <SuiClientProvider networks={networkConfig} defaultNetwork="localnet">
-        <WalletProvider>
+        <WalletProvider >
           <App />
         </WalletProvider>
       </SuiClientProvider>
